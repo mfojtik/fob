@@ -9,7 +9,7 @@ func (o PluginOptions) PrintTable(title string, data [][]string) {
 	table.SetBorder(false)
 	table.AppendBulk(data)
 	table.SetAlignment(tablewriter.ALIGN_LEFT)
-	table.SetAutoWrapText(true)
+	//table.SetAutoWrapText(true)
 	o.Printf("%s:\n", title)
 	table.Render()
 	o.Printf("")

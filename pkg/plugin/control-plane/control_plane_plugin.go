@@ -53,5 +53,17 @@ func (c *ControlPlanePlugin) Execute(ctx context.Context, o plugin.PluginOptions
 
 	o.PrintTable("Control Plane Pods Status", formatControlPlanePods(pods))
 
+	eventsBytes, err := artifact.Get(ctx, o.JobUrl, "/artifacts/e2e-aws/events.json")
+	if err != nil {
+		return err
+	}
+	events, err := decodeEvents(eventsBytes)
+	if err != nil {
+		return err
+	}
+	filterControlPlaneEvents(&events)
+
+	o.PrintTable("Control Plane Events", formatControlPlaneEvents(events))
+
 	return nil
 }
