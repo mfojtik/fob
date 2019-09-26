@@ -8,8 +8,7 @@ import (
 	"strings"
 
 	"github.com/mfojtik/fob/pkg/plugin"
-	"github.com/mfojtik/fob/pkg/plugin/pods"
-	"github.com/mfojtik/fob/pkg/plugin/sample"
+	control_plane "github.com/mfojtik/fob/pkg/plugin/control-plane"
 )
 
 type defaultPluginManager struct {
@@ -40,8 +39,10 @@ func (d *defaultPluginManager) Run(ctx context.Context, options plugin.PluginOpt
 var plugins = &defaultPluginManager{}
 
 func main() {
-	plugins.Add(&sample.SamplePlugin{})
-	plugins.Add(&pods.PodStatusPlugin{})
+	// plugins.Add(&sample.SamplePlugin{})
+	// plugins.Add(&pods.PodStatusPlugin{})
+
+	plugins.Add(&control_plane.ControlPlanePlugin{})
 
 	if len(os.Args) != 2 {
 		fmt.Printf("usage: %s JOB_URL\n", path.Base(os.Args[0]))
